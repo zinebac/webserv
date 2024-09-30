@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css" rel="stylesheet">
+  <title>landing page</title>
+  <style>
+      @keyframes flicker {
+      
+        0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        
+            text-shadow:
+            0 0 4px #fff,
+            0 0 11px #fff,
+            0 0 19px #fff,
+            0 0 40px rgb(255, 0, 242),
+            0 0 80px rgb(255, 0, 123),
+            0 0 90px rgb(255, 0, 136),
+            0 0 100px rgb(102, 0, 255),
+            0 0 150px rgb(81, 0, 255);
+        
+        }
+      
+        20%, 24%, 55% {        
+            text-shadow: none;
+        }    
+      }
+      h2 {
+       font-size: 1.8rem;
+      }
+
+      .container {
+        margin-top: 20vh;
+      }
+      body {
+        font-family: 'Droid Arabic Naskh' ;font-size: 22px;
+        font-size: 18px;
+        background-image: url("background.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-color: #0f0e0e;
+        background-position: center;
+        position: relative;
+      } 
+
+      h1, h2 {
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: 400;
+      }
+
+      .neonText {
+          animation: flicker 1.5s infinite alternate;
+          color: #fff;
+        }
+        .img-container-block {
+        text-align: center;
+      }
+
+      img {
+        border-radius: 4px;
+        padding: 5px;
+        width: 300px;
+      }
+
+      img:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+      }
+
+      .img-container-inline {
+        text-align: center;
+        display: block;
+
+      }
+      h1 {
+        font-size: 4.2rem;    
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="neonText">فرقة مكافحة الحشرات</h1>
+    <h2 class="neonText">تقدم</h2>
+  </div><span class="img-container-inline"><img src="aababach.jpeg" alt="ba lbachir"></span> <span class="img-container-inline"><img src="gkarib.jpeg" alt="ghitox"></span> <span class="img-container-inline"><img src="zait-che.jpeg" alt="zanouba"></span>
+</body>
+</html>

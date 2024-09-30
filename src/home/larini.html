@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+button {
+	display: block;
+	width: 60vw;
+	max-width: 300px;
+	margin: 0 auto;
+	background-color: slateblue;
+	border-radius: 2px;
+	font-size: 1em;
+	line-height: 2.5em;
+	text-align: center;
+}
+
+button:hover {
+	background-color: cornflowerblue;
+}
+
+button:active {
+	background-color: mediumaquamarine;
+}
+
+input {
+	border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px; 
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+body {
+    background-image: url("background.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: black;
+}
+
+</style>
+</head>
+<body>
+    <form>
+        <input type="file" id="apply" accept="image/*,.pdf">
+        <button type="button" onclick="sendGetRequest()">Download File</button>
+        <button type="button" onclick="sendPostRequest()">Upload File</button>
+    </form>
+
+    <script>
+        function getUserInput() {
+            const getEndpoint = prompt("Please enter the GET endpoint URL:");
+            const postEndpoint = prompt("Please enter the POST endpoint URL:");
+
+            return { getEndpoint, postEndpoint };
+        }
+        function sendGetRequest() {
+            const userInput = getUserInput();
+            if (!userInput.getEndpoint) {
+                alert("GET endpoint URL is missing.");
+                return;
+            }
+            const base64FileData = 'base64FileData';
+
+            if (!base64FileData) {
+                alert("File data is missing.");
+                return;
+            }
+            const url = `${userInput.getEndpoint}?file=${encodeURIComponent(base64FileData)}`;
+            window.open(url, '_blank');
+        }
+        function sendPostRequest() {
+            const userInput = getUserInput();
+            if (!userInput.postEndpoint) {
+                alert("POST endpoint URL is missing.");
+                return;
+            }
+
+            const fileInput = document.getElementById('apply');
+            const selectedFile = fileInput.files[0];
+
+            if (!selectedFile) {
+                alert("Please select a file to upload.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            fetch(userInput.postEndpoint, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const downloadLink = document.createElement('a');
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = selectedFile.name;
+                downloadLink.click();
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
+
